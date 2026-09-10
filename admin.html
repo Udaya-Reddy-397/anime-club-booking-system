@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Otaku Anime Club — Admin Terminal</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
+  <style>
+    .admin-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+    .table-wrapper { overflow-x: auto; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th, td { border: 1px solid #333; padding: 0.75rem; text-align: left; font-size: 0.85rem; }
+    th { background: rgba(255, 51, 51, 0.1); color: #ff0000; font-weight: bold; }
+    td { color: #fff; background: rgba(0, 0, 0, 0.5); }
+    #loginScreen { text-align: center; margin-top: 10vh; }
+    #dashboardScreen { display: none; }
+  </style>
+</head>
+<body>
+  <div class="crt-overlay"></div>
+  <main class="container">
+    <div class="terminal-window">
+      <div class="term-titlebar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="term-title">root@vitbhopal:~# ./admin.sh</span>
+      </div>
+      <div class="term-body admin-container">
+        
+        <!-- LOGIN -->
+        <div id="loginScreen">
+          <h2 style="margin-bottom: 1rem; color: #ff0000;">> ADMIN_AUTHENTICATION_REQUIRED</h2>
+          <input type="password" id="adminPwd" placeholder="Enter Password" style="width: 250px; text-align: center;" />
+          <br><br>
+          <button class="btn" onclick="login()">[ACCESS_GRANTED]</button>
+          <p style="margin-top: 1rem; color: #888; font-size: 0.9rem;">(Evaluator Hint: Password is <b style="color:var(--text)">otaku</b>)</p>
+          <p id="loginErr" style="color: red; margin-top: 0.5rem; font-weight: bold;"></p>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboardScreen">
+          <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="color: #ff0000;">> OTAKU_DB_BOOKINGS</h2>
+            <button class="btn btn-sm" onclick="fetchBookings()">[REFRESH_DB]</button>
+          </div>
+          
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Student Name</th>
+                  <th>Reg No</th>
+                  <th>Event</th>
+                  <th>Fee</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTable">
+                <!-- Data populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  
+  <div id="toast" class="toast">> SYSTEM_READY</div>
+  
+  <script src="js/admin.js"></script>
+</body>
+</html>

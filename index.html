@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otaku Anime Club | VIT Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=2" />
+</head>
+<body>
+  <div class="crt-overlay"></div>
+  <div class="scanlines"></div>
+
+  <header class="term-header">
+    <div class="container header-inner">
+      <div class="brand" style="display: flex; flex-direction: row; align-items: center; gap: 15px;">
+        <img src="assets/logo.png" alt="Otaku Anime Club" style="height: 48px; width: auto; object-fit: contain;" />
+        <div>
+          <div class="logo-anime">
+            <span class="jp">御宅</span>
+            <span class="club-name">OTAKU ANIME CLUB</span>
+          </div>
+          <div class="college">VIT BHOPAL</div>
+        </div>
+      </div>
+      <nav class="term-nav">
+        <button class="nav-btn active" data-section="home" onclick="showSection('home')">[HOME]</button>
+        <button class="nav-btn" data-section="events" onclick="showSection('events')">[EVENTS]</button>
+        <button class="nav-btn" data-section="register" onclick="showSection('register')">[REGISTER]</button>
+        <button class="nav-btn" data-section="payment" onclick="showSection('payment')">[PAYMENT]</button>
+        <button class="nav-btn" data-section="mybookings" onclick="showSection('mybookings')">[MY_BOOKINGS]</button>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button onclick="showSection('home');closeMobile()">[HOME]</button>
+    <button onclick="showSection('events');closeMobile()">[EVENTS]</button>
+    <button onclick="showSection('register');closeMobile()">[REGISTER]</button>
+    <button onclick="showSection('payment');closeMobile()">[PAYMENT]</button>
+    <button onclick="showSection('mybookings');closeMobile()">[MY_BOOKINGS]</button>
+  </div>
+
+  <main class="term-main">
+    <!-- HOME -->
+    <section id="home" class="section active">
+      <div class="container">
+        <div class="terminal-window">
+          <div class="term-titlebar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="term-title">otaku@vitbhopal:~$ ./welcome.sh</span>
+          </div>
+          <div class="term-body">
+            <div class="hero-block">
+              <div class="ascii-art">
+<pre>
+ ██████╗ ████████╗ █████╗ ██╗  ██╗██╗   ██╗
+██╔═══██╗╚══██╔══╝██╔══██╗██║ ██╔╝██║   ██║
+██║   ██║   ██║   ███████║█████╔╝ ██║   ██║
+██║   ██║   ██║   ██╔══██║██╔═██╗ ██║   ██║
+╚██████╔╝   ██║   ██║  ██║██║  ██╗╚██████╔╝
+ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝
+</pre>
+              </div>
+              <h1 class="glitch" data-text="ANIME CLUB // VIT BHOPAL">ANIME CLUB // VIT BHOPAL</h1>
+              <p class="tagline">> Welcome, senpai. Register for screenings, cosplay meets, quizzes & more.</p>
+              <div class="hero-actions">
+                <button class="btn" onclick="showSection('events')">./browse_events</button>
+                <button class="btn btn-accent" onclick="showSection('register')">./register</button>
+              </div>
+              <div class="stats-row">
+                <div class="stat-box">
+                  <span class="stat-val" id="statEvents">0</span>
+                  <span class="stat-lbl">UPCOMING</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-val" id="statBookings">0</span>
+                  <span class="stat-lbl">BOOKINGS</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-val">UPI</span>
+                  <span class="stat-lbl">PAYMENT</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-label">// FEATURED_EVENTS</div>
+        <div class="events-grid" id="featuredEvents"></div>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="events" class="section">
+      <div class="container">
+        <div class="section-label">// ALL_EVENTS — filter by category</div>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">[ALL]</button>
+          <button class="filter-btn" data-filter="screening">[SCREENING]</button>
+          <button class="filter-btn" data-filter="cosplay">[COSPLAY]</button>
+          <button class="filter-btn" data-filter="quiz">[QUIZ]</button>
+          <button class="filter-btn" data-filter="meetup">[MEETUP]</button>
+          <button class="filter-btn" data-filter="workshop">[WORKSHOP]</button>
+        </div>
+        <div class="events-grid" id="allEvents"></div>
+        <div class="empty-state" id="eventsEmpty" style="display:none;">
+          <pre>> No events match filter...</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="register" class="section">
+      <div class="container">
+        <div class="section-label">// REGISTER — fill the form, senpai</div>
+        <div class="form-window">
+          <div class="term-titlebar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="term-title">registration_form.exe</span>
+          </div>
+          <form id="registrationForm" class="reg-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label>> FULL_NAME *</label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g. Naruto Uzumaki" required />
+                <span class="error-msg" id="errName"></span>
+              </div>
+              <div class="form-group">
+                <label>> REGISTRATION_NO *</label>
+                <input type="text" id="regNumber" name="regNumber" placeholder="e.g. 21BCE1001" required />
+                <span class="error-msg" id="errReg"></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>> EMAIL *</label>
+                <input type="email" id="email" name="email" placeholder="you@vitbhopal.ac.in" required />
+                <span class="error-msg" id="errEmail"></span>
+              </div>
+              <div class="form-group">
+                <label>> PHONE *</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" required />
+                <span class="error-msg" id="errPhone"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>> SELECT_EVENT *</label>
+              <select id="eventSelect" name="eventSelect" required>
+                <option value="">— choose event —</option>
+              </select>
+              <span class="error-msg" id="errEvent"></span>
+            </div>
+            <div class="form-group">
+              <label>> YEAR_BRANCH (optional)</label>
+              <input type="text" id="year" name="year" placeholder="e.g. 2nd Year CSE" />
+            </div>
+            <div class="form-group">
+              <label>> FAVOURITE_ANIME (optional)</label>
+              <input type="text" id="favAnime" name="favAnime" placeholder="e.g. Attack on Titan, One Piece..." />
+            </div>
+            <div class="form-group">
+              <label>> NOTES (optional)</label>
+              <textarea id="notes" name="notes" rows="2" placeholder="Dietary needs / cosplay character / questions..."></textarea>
+            </div>
+
+            <div class="form-group payment-toggle">
+              <label>> PAYMENT_METHOD *</label>
+              <div class="pay-options">
+                <label class="pay-opt">
+                  <input type="radio" name="payMethod" value="later" checked />
+                  <span>Pay later / Free entry</span>
+                </label>
+                <label class="pay-opt">
+                  <input type="radio" name="payMethod" value="upi" />
+                  <span>Pay now via UPI (QR)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input type="checkbox" id="agree" name="agree" required />
+              <label for="agree">> I confirm details are correct & I will follow club rules.</label>
+            </div>
+            <span class="error-msg" id="errAgree"></span>
+
+            <button type="submit" class="btn btn-full" id="submitBtn">
+              [ CONFIRM_REGISTRATION ]
+            </button>
+          </form>
+
+          <div class="success-card" id="successCard" style="display:none;">
+            <pre class="success-art">
+ █████╗  ██████╗ ██╗  ██╗
+██╔══██╗██╔═══██╗██║ ██╔╝
+███████║██║   ██║█████╔╝ 
+██╔══██║██║   ██║██╔═██╗ 
+██║  ██║╚██████╔╝██║  ██╗
+╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+            </pre>
+            <h3>> REGISTRATION_SUCCESSFUL</h3>
+            <p id="successMsg"></p>
+            <div class="booking-id">BOOKING_ID: <strong id="bookingId"></strong></div>
+            <p class="hint" id="paymentHint" style="display:none;">
+              >> Complete payment via the PAYMENT tab using the QR code.<br>
+              UPI ID: <code>8637288493@ptyes</code>
+            </p>
+            <div class="success-actions">
+              <button class="btn" onclick="showSection('mybookings')">[VIEW_BOOKINGS]</button>
+              <button class="btn btn-accent" onclick="showSection('payment')">[GO_TO_PAYMENT]</button>
+              <button class="btn" onclick="resetForm()">[REGISTER_ANOTHER]</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYMENT -->
+    <section id="payment" class="section">
+      <div class="container">
+        <div class="section-label">// PAYMENT — scan QR or use UPI ID</div>
+        <div class="payment-window">
+          <div class="term-titlebar">
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span class="term-title">upi_payment.sys</span>
+          </div>
+          <div class="payment-body">
+            <div class="pay-left">
+              <h2>> REAL_UPI_PAYMENT</h2>
+              <p class="pay-desc">
+                Scan the QR code with any UPI app (Paytm, GPay, PhonePe, BHIM)<br>
+                or send money to the UPI ID below.
+              </p>
+              <div class="upi-box">
+                <span class="upi-label">UPI ID</span>
+                <code class="upi-id" id="upiId">8637288493@ptyes</code>
+                <button class="btn btn-sm" onclick="copyUpi()">[COPY]</button>
+              </div>
+              <div class="pay-note">
+                <pre>
+> After payment, keep the transaction ID.
+> Mention your REGISTRATION_NO in the note.
+> Event fees (if any) will be listed on event cards.
+> Free events → no payment required.
+                </pre>
+              </div>
+              <div class="manual-confirm" style="margin-top: 1rem;">
+                <label>> Submit your payment details for Admin verification:</label>
+                <div class="lookup-row" style="flex-wrap: wrap; margin-top: 0.5rem;">
+                  <input type="text" id="payReg" placeholder="Reg No (e.g. 21BCE1001)" style="flex: 1; min-width: 150px;" />
+                  <input type="text" id="txnId" placeholder="Transaction ID" style="flex: 1; min-width: 150px;" />
+                  <button class="btn" onclick="submitTxn()">[SUBMIT_TXN]</button>
+                </div>
+              </div>
+            </div>
+            <div class="pay-right">
+              <div class="qr-frame">
+                <img src="assets/qr-code.png" alt="Paytm UPI QR Code" class="qr-img" />
+                <div class="qr-caption">Scan to Pay • Paytm / UPI</div>
+                <div class="qr-upi">8637288493@ptyes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY BOOKINGS -->
+    <section id="mybookings" class="section">
+      <div class="container">
+        <div class="section-label">// MY_BOOKINGS — lookup by registration number</div>
+        <div class="lookup-box">
+          <label>> ENTER_REGISTRATION_NO</label>
+          <div class="lookup-row">
+            <input type="text" id="lookupReg" placeholder="e.g. 21BCE1001" />
+            <button class="btn" onclick="lookupBookings()">[FIND]</button>
+          </div>
+        </div>
+        <div id="bookingsList" class="bookings-list"></div>
+        <div class="empty-state" id="bookingsEmpty" style="display:none;">
+          <pre>> No bookings found for this registration number.</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">[X]</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <footer class="term-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="jp">御宅</span> OTAKU ANIME CLUB · VIT BHOPAL
+      </div>
+      <div class="footer-right">
+        <span>localhost ready</span> · <span>UPI: 8637288493@ptyes</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>
