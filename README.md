@@ -17,8 +17,12 @@ Terminal-style event booking website for the **Otaku Anime Club** at **VIT Bhopa
 ```bash
 npm install
 node server.js
-# open http://localhost:8080
 ```
+
+### Accessing the Application
+
+- **Student Website**: [http://localhost:8080](http://localhost:8080) (Book events, view bookings, submit transaction IDs)
+- **Admin Dashboard**: [http://localhost:8080/admin.html](http://localhost:8080/admin.html) (View all bookings, verify payments, manage events)
 
 ## Payment
 
