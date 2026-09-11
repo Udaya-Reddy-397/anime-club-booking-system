@@ -424,29 +424,29 @@ function handleSubmit(e) {
     renderFeatured();
     renderAllEvents();
     populateEventSelect();
+
+    f.style.display = "none";
+    const card = document.getElementById("successCard");
+    card.style.display = "block";
+    document.getElementById("successMsg").textContent =
+      `You are registered for "${event.title}" on ${formatDate(event.date)}.`;
+    document.getElementById("bookingId").textContent = bookingId;
+
+    const hint = document.getElementById("paymentHint");
+    const successTitle = document.querySelector("#successCard h3");
+    if (event.fee > 0) {
+      hint.style.display = "block";
+      if (successTitle) successTitle.textContent = "> REGISTRATION_PENDING_PAYMENT";
+      showToast("Registration pending payment!", "success");
+    } else {
+      hint.style.display = "none";
+      if (successTitle) successTitle.textContent = "> REGISTRATION_SUCCESSFUL";
+      showToast("Free event entry confirmed!", "success");
+    }
   }).catch(err => {
     console.error(err);
     showToast("Error saving booking! Are you using the correct link?", "error");
   });
-
-  f.style.display = "none";
-  const card = document.getElementById("successCard");
-  card.style.display = "block";
-  document.getElementById("successMsg").textContent =
-    `You are registered for "${event.title}" on ${formatDate(event.date)}.`;
-  document.getElementById("bookingId").textContent = bookingId;
-
-  const hint = document.getElementById("paymentHint");
-  const successTitle = document.querySelector("#successCard h3");
-  if (event.fee > 0) {
-    hint.style.display = "block";
-    if (successTitle) successTitle.textContent = "> REGISTRATION_PENDING_PAYMENT";
-    showToast("Registration pending payment!", "success");
-  } else {
-    hint.style.display = "none";
-    if (successTitle) successTitle.textContent = "> REGISTRATION_SUCCESSFUL";
-    showToast("Free event entry confirmed!", "success");
-  }
 }
 
 function resetForm() {

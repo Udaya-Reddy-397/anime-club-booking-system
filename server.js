@@ -12,14 +12,22 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Utility to read DB
+let dbCache = null;
 const readDB = () => {
+  if (dbCache) return dbCache;
   const data = fs.readFileSync(DB_FILE, 'utf-8');
-  return JSON.parse(data);
+  dbCache = JSON.parse(data);
+  return dbCache;
 };
 
 // Utility to write DB
 const writeDB = (data) => {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  dbCache = data;
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+  } catch (err) {
+    console.warn("Could not write to db.json (read-only system like Vercel). Using in-memory database.");
+  }
 };
 
 // GET all events
