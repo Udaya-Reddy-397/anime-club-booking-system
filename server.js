@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 const DB_FILE = path.join(__dirname, 'db.json');
 
 app.use(cors());
@@ -111,10 +110,4 @@ app.post('/api/bookings/verify', (req, res) => {
   res.json({ success: true, count: userBookings.length });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n========================================`);
-  console.log(`Otaku Club Booking System is Running!`);
-  console.log(`========================================`);
-  console.log(`> Student Website: http://localhost:${PORT}`);
-  console.log(`> Admin Dashboard: http://localhost:${PORT}/admin.html\n`);
-});
+module.exports = app;
